@@ -49,3 +49,29 @@ ggsave(
 ##### Description
 The scatter plot illustrates the relationship between temperature(y-axis) and time_hour(x-axis) for the early January.It shows a moderate overall rise of temperature from January 1st to 15th, with daily minimum and maximum temperatures gradually increasing. This pattern was temporarily broken by two anomalous periods around January 7th-8th and January 15th. Besides, daily temperatures follow a regular and wave-like pattern. Within each day, lower temperatures usually occur overnight and in the early morning, while higher temperatures are observed during midday and afternoon hours. 
 Additionally, each point colored according to the humidity level, using a blue-to-red gradient where blue represents low humidity and red represents high humidity. However, there is an inverse relationship between temperature and humidity: warmer times always have lower humidity(blue) and colder times have higher humidity(red). 
+
+## Problem 2
+#### Create a data frame
+```{r}
+set.seed(917)
+df <- data.frame(
+  random_sample = rnorm(10),
+  logical_vector = rnorm(10) > 0,
+  char_vector = letters[1:10], 
+  factor_vector = factor(rep(c("Small", "Medium", "Large"), length.out = 10)) 
+)
+str(df)
+```
+
+#### Try to take the mean of each variable and explain
+```{r}
+mean_random <- mean(pull(df, random_sample))
+mean_logical <- mean(pull(df, logical_vector))
+mean_char <- mean(pull(df, char_vector))
+mean_factor <- mean(pull(df, factor_vector))
+cat(" The mean of random sample is",mean_random,"\n",
+    "The mean of logical vector is",mean_logical,"\n",
+    "The mean of character vector  is",mean_char,"\n",
+    "The mean of factor vector is",mean_factor
+)
+```
