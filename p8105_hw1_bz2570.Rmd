@@ -1,0 +1,51 @@
+---
+title: "p8105_hw1_bz2570"
+author: "Boran Zhai"
+date: "2025-09-18"
+output: github_document
+---
+## Problem 1
+#### Load the library and the data
+```{r}
+library(moderndive)
+library(tidyverse)
+library(ggplot2)
+```
+```{r}
+data("early_january_weather")
+```
+
+#### Write a short description of the dataset
+```{r}
+vars <- names(early_january_weather)
+n_rows = nrow(early_january_weather)
+n_cols = ncol(early_january_weather)
+temp_mean = mean(early_january_weather$temp)
+summary(early_january_weather)
+cat(" names:",vars,"\n",
+    "size:",n_rows,"rows","and",n_cols,"columns","\n",
+    "the mean temperature:", temp_mean)
+```
+##### Description 
+The dataset early_january_weather contains 358 rows and 15 columns, with the following variables and some values of important variables: origin, year(2013), month(January), day(from 1-15), hour, temp(ranges from 24.08 to 57.92 with a mean of about 39.58), dewp(ranges from 8.96 to 53.06 with a mean of about 28.06), humid(ranges from 32.86 to 100.00 with a mean of about 65.48), wind_dir, wind_speed, wind_gust, precip, pressure(ranges from 1011 to 1034 with mean of about 1023), visib(ranges from 0.12 to 10.00 with mean near 8.52), and time_hour(falls between 2013-01-01 01:00:00 to 2013-01-15 23:00:00). <br/>
+  
+The mean temperature is approximately 39.58.
+
+#### Make a scatterplot of temp (y) vs time_hour (x); color points using the humid variable 
+```{r}
+Sys.setlocale("LC_TIME","English")
+scatterplot <- ggplot(early_january_weather, aes(x = time_hour, y = temp, color = humid)) +
+  geom_point(size = 2, alpha = 0.8) +        
+  scale_color_gradient(low = "blue", high = "red") + 
+  labs(x = "Time_hour", y = "Temperature", color = "Humidity") +
+  theme_minimal()
+print(scatterplot)
+
+ggsave(
+  filename = "D:/zbr/p8105_hw1_bz2570/scatterplot.png", 
+  plot = scatterplot
+)
+```
+##### Description
+The scatter plot illustrates the relationship between temperature(y-axis) and time_hour(x-axis) for the early January.It shows a moderate overall rise of temperature from January 1st to 15th, with daily minimum and maximum temperatures gradually increasing. This pattern was temporarily broken by two anomalous periods around January 7th-8th and January 15th. Besides, daily temperatures follow a regular and wave-like pattern. Within each day, lower temperatures usually occur overnight and in the early morning, while higher temperatures are observed during midday and afternoon hours. 
+Additionally, each point colored according to the humidity level, using a blue-to-red gradient where blue represents low humidity and red represents high humidity. However, there is an inverse relationship between temperature and humidity: warmer times always have lower humidity(blue) and colder times have higher humidity(red). 
