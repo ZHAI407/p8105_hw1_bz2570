@@ -18,10 +18,10 @@ data("early_january_weather")
 #### Write a short description of the dataset (inline R code)
 The dataset early_january_weather contains `r nrow(early_january_weather)` rows and `r ncol(early_january_weather)` columns, with the following variables: `r paste(names(early_january_weather), collapse = ", ")`. <br/> 
 For some key variables:<br/>
-Temperature: Range from `r min(early_january_weather$temp)` to `r max(early_january_weather$temp)` with an approximate mean of `r round(mean(early_january_weather$temp),2)`;<br/> 
-Humidity: Range from `r min(early_january_weather$humid)` to `r max(early_january_weather$humid)` with an approximate mean of `r round(mean(early_january_weather$humid),2)`;<br/> 
-Wind speed: Ranges from `r min(early_january_weather$wind_speed)` to `r max(early_january_weather$wind_speed)` with an approximate mean of `r round(mean(early_january_weather$wind_speed),2)`;<br/> 
-Time_hour: Falls between `r min(early_january_weather$time_hour)` to `r max(early_january_weather$time_hour)`.
+Temperature(temp): range from `r min(early_january_weather$temp)` to `r max(early_january_weather$temp)` with an approximate mean of `r round(mean(early_january_weather$temp),2)`;<br/> 
+Humidity(humid): range from `r min(early_january_weather$humid)` to `r max(early_january_weather$humid)` with an approximate mean of `r round(mean(early_january_weather$humid),2)`;<br/> 
+Wind speed(wind_speed): ranges from `r min(early_january_weather$wind_speed)` to `r max(early_january_weather$wind_speed)` with an approximate mean of `r round(mean(early_january_weather$wind_speed),2)`;<br/> 
+Time_hour: falls between `r min(early_january_weather$time_hour)` to `r max(early_january_weather$time_hour)`.
 
 #### Make a scatterplot of temp (y) vs time_hour (x); color points using the humid variable 
 ```{r}
