@@ -75,3 +75,6 @@ cat(" The mean of random sample is",mean_random,"\n",
     "The mean of factor vector is",mean_factor
 )
 ```
+##### Description
+Taking the mean works on numeric(random_stample) and logical variable (logical_vector) because logical vectors are automatically converted to numbers (TRUE = 1, FALSE = 0). However, it doesn't work on character (char_vector) and factor (factor_vector) variables, which generate NA with a warning.<br/>
+
