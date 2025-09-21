@@ -15,21 +15,13 @@ library(ggplot2)
 data("early_january_weather")
 ```
 
-#### Write a short description of the dataset
-```{r}
-vars <- names(early_january_weather)
-n_rows = nrow(early_january_weather)
-n_cols = ncol(early_january_weather)
-temp_mean = mean(early_january_weather$temp)
-summary(early_january_weather)
-cat(" names:",vars,"\n",
-    "size:",n_rows,"rows","and",n_cols,"columns","\n",
-    "the mean temperature:", temp_mean)
-```
-##### Description 
-The dataset early_january_weather contains 358 rows and 15 columns, with the following variables and some values of important variables: origin, year(2013), month(January), day(from 1-15), hour, temp(ranges from 24.08 to 57.92 with a mean of about 39.58), dewp(ranges from 8.96 to 53.06 with a mean of about 28.06), humid(ranges from 32.86 to 100.00 with a mean of about 65.48), wind_dir, wind_speed, wind_gust, precip, pressure(ranges from 1011 to 1034 with mean of about 1023), visib(ranges from 0.12 to 10.00 with mean near 8.52), and time_hour(falls between 2013-01-01 01:00:00 to 2013-01-15 23:00:00). <br/>
-  
-The mean temperature is approximately 39.58.
+#### Write a short description of the dataset (inline R code)
+The dataset early_january_weather contains `r nrow(early_january_weather)` rows and `r ncol(early_january_weather)` columns, with the following variables: `r paste(names(early_january_weather), collapse = ", ")`. <br/> 
+For some key variables:<br/>
+Temperature: Range from `r min(early_january_weather$temp)` to `r max(early_january_weather$temp)` with an approximate mean of `r round(mean(early_january_weather$temp),2)`;<br/> 
+Humidity: Range from `r min(early_january_weather$humid)` to `r max(early_january_weather$humid)` with an approximate mean of `r round(mean(early_january_weather$humid),2)`;<br/> 
+Wind speed: Ranges from `r min(early_january_weather$wind_speed)` to `r max(early_january_weather$wind_speed)` with an approximate mean of `r round(mean(early_january_weather$wind_speed),2)`;<br/> 
+Time_hour: Falls between `r min(early_january_weather$time_hour)` to `r max(early_january_weather$time_hour)`.
 
 #### Make a scatterplot of temp (y) vs time_hour (x); color points using the humid variable 
 ```{r}
@@ -83,3 +75,10 @@ logical_as_numeric <- as.numeric(pull(df, logical_vector)) <br/>
 char_as_numeric <- as.numeric(pull(df, char_vector)) <br/>
 factor_as_numeric <- as.numeric(pull(df, factor_vector)) <br/>
 
+After applying the as.numeric function, these vector will be changed:<br/>
+*Logical vector convert to 1 (TRUE) or 0 (FALSE),so it will have mean;<br/>
+*Character vector still returns NA with warning for all values because letters cannot be interpreted as numbers, and it won't have mean;<br/>
+*Factor vector return to integers corresponding to factor levels,such as "1""2""3" for "Small""Medium""Large", not the original numeric values. So it will have mean, but mean is meaningless.<br/>
+
+#### Does this help explain what happens when you try to take the mean?
+Yes, applying as.numeric() explains the behavior of the mean() function. The mean calculation works for the numeric and logical vectors because they can be directly or implicitly converted to meaningful numbers. However, it doesn't work on the character and factor vectors. For the character vector, it always return NA because the text characters have no numerical interpretation. While the factor vector can be converted to numbers, these values represent the integer codes of its categories like "1","2","3"and so on with no quantitative meaning. This confirms that mean function requires numeric data and only automatically handles the logical-to-numeric coercion.
