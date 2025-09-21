@@ -35,7 +35,7 @@ The mean temperature is approximately 39.58.
 ```{r}
 Sys.setlocale("LC_TIME","English")
 scatterplot <- ggplot(early_january_weather, aes(x = time_hour, y = temp, color = humid)) +
-  geom_point(size = 2, alpha = 0.8) +        
+  geom_point(size = 1) +        
   scale_color_gradient(low = "blue", high = "red") + 
   labs(x = "Time_hour", y = "Temperature", color = "Humidity") +
   theme_minimal()
@@ -77,4 +77,9 @@ cat(" The mean of random sample is",mean_random,"\n",
 ```
 ##### Description
 Taking the mean works on numeric(random_stample) and logical variable (logical_vector) because logical vectors are automatically converted to numbers (TRUE = 1, FALSE = 0). However, it doesn't work on character (char_vector) and factor (factor_vector) variables, which generate NA with a warning.<br/>
+
+#### Applies the as.numeric function
+logical_as_numeric <- as.numeric(pull(df, logical_vector)) <br/>
+char_as_numeric <- as.numeric(pull(df, char_vector)) <br/>
+factor_as_numeric <- as.numeric(pull(df, factor_vector)) <br/>
 
